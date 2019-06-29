@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
+import SearchField from "./components/SearchField/SearchField";
+import BooksDisplay from "./components/BooksDisplay/BooksDisplay";
 import "./App.css";
 
 class App extends Component {
@@ -7,12 +8,15 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
+          <h1>Book Finder</h1>
+          <p className="App-intro">
+            To get started, search below for a book title.
         </p>
+        </div>
+        <div className="book-search">
+          <SearchField />
+          <BooksDisplay />
+        </div>
       </div>
     );
   }
