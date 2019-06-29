@@ -1,7 +1,9 @@
 const express = require("express");
 const path = require("path");
+const axios = require("axios");
 const PORT = process.env.PORT || 3001;
 const app = express();
+require("dotenv").config();
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -12,6 +14,17 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Define API routes here
+app.get("/api/books/:search", function(req, res) {
+  const url = `https://www.googleapis.com/books/v1/volumes?q=${req.params.search}:keyes&key=${process.env.GOOGLE_API_KEY}`;
+  console.log(url);
+  axios.get(url)
+  .then(function(response) {
+    console.log(response.data.items[0]);
+  })
+  .catch(function(error) {
+    console.log(error);
+  });
+})
 
 // Send every other request to the React app
 // Define any API routes before this runs
