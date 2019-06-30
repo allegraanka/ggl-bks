@@ -19,7 +19,21 @@ app.get("/api/books/:search", function(req, res) {
   console.log(url);
   axios.get(url)
   .then(function(response) {
-    console.log(response.data.items[0]);
+    let resultsArray = response.data.items;
+
+    for (let i = 0; i < resultsArray.length; i++) {
+      let bookResults = {
+        title: resultsArray[i].volumeInfo.title,
+        authors: resultsArray[i].volumeInfo.authors,
+        description: resultsArray[i].volumeInfo.description
+      }
+      console.log(`Title: ${resultsArray[i].volumeInfo.title}`);
+      console.log(`Authors: ${resultsArray[i].volumeInfo.authors}`);
+      console.log(`Description: ${resultsArray[i].volumeInfo.description}`);
+      res.json(bookResults);
+    }
+
+
   })
   .catch(function(error) {
     console.log(error);
